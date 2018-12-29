@@ -7,7 +7,10 @@ class App extends Component {
     super() 
     this.state = {
       todos: [],
-      newTodo: ""
+      newTodo: "",
+      completed: false, 
+      due: "",
+      priority: 1,
     }
   }
 
@@ -31,10 +34,26 @@ class App extends Component {
     })
   }
 
+  updateDueDate = e => {
+    this.setState({
+      due: e.target.value
+    })
+  }
+
+  updatePriority = e => {
+    this.setState({
+      priority: e.target.value
+    })
+  }
+
   addItem = e => {
     e.preventDefault()
     let task = {
-      task: this.state.newTodo
+      task: this.state.newTodo,
+      due: this.state.due,
+      priority: this.state.priority,
+      completed: this.state.completed,
+      id: this.state.todos.length + 1
     }
     this.setState({
       todos: [...this.state.todos, task]
@@ -46,7 +65,7 @@ class App extends Component {
     let checked = this.state.todos.filter(item => {
       return item.id === convert
     })
-    if (checked[0].completed == true) {
+    if (checked[0].completed === true) {
       checked[0].completed = false
     } else {
       checked[0].completed = true
@@ -56,16 +75,28 @@ class App extends Component {
     })  
   }
 
+  removeTask = (index) => {
+    const removeToDo = this.state.todos.filter((todo) => index.id !== todo.id)
+    //return everything else
+   
+    this.setState({ 
+      todos: removeToDo
+    })
+  }
+
   render() {
     return (
       <div>
         <AddListItem 
           addItem = {this.addItem}
           updateToDo = {this.updateToDo}
+          updateDueDate = {this.updateDueDate}
+          updatePriority = {this.updatePriority}
         />
         <List 
           todos = {this.state.todos}
           completedTask = {this.completedTask}
+          removeTask = {this.removeTask}
         />
       </div>
       )}

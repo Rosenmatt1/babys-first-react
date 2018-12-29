@@ -14,6 +14,23 @@ class AddListItem extends React.Component {
             className="form-control"
             type="text"
             placeholder="Add To Do Here"
+            required
+          />
+          Due Date
+          <input 
+            onChange= {this.props.updateDueDate}
+            className="form-control"
+            type="text"
+            placeholder="Month/Day/Year"
+            required
+          />
+          Priority
+          <input 
+            onChange= {this.props.updatePriority}
+            className="form-control"
+            type="number"
+            placeholder="Input value between 0 and 10"
+            required
           />
           <button>
             Add Item
