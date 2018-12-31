@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 class ListItem extends React.Component {
 
   render() {
@@ -26,8 +25,7 @@ class ListItem extends React.Component {
       Click to Remove
       </button>
       </li>
-    )
-  }
+    )}
 }
 
 export default ListItem

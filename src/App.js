@@ -65,11 +65,7 @@ class App extends Component {
     let checked = this.state.todos.filter(item => {
       return item.id === convert
     })
-    if (checked[0].completed === true) {
-      checked[0].completed = false
-    } else {
-      checked[0].completed = true
-    }
+    checked[0].completed === true ? checked[0].completed = false : checked[0].completed = true
     this.setState({
       todos: this.state.todos
     })  
