@@ -11,6 +11,7 @@ class App extends Component {
       completed: false, 
       due: "",
       priority: 1,
+      displayError: false
     }
   }
 
@@ -25,7 +26,11 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchTodoList()
-      .catch(err => console.error(err))
+      .catch(err => {
+        this.setState({
+          displayError: true
+        })
+      })
   }
 
   updateToDo = e => {
@@ -61,7 +66,7 @@ class App extends Component {
   }
 
   completedTask = (e) => {
-    let convert = Number(e.target.value)
+    let convert = e.target.value * 1
     let checked = this.state.todos.filter(item => {
       return item.id === convert
     })
@@ -94,6 +99,7 @@ class App extends Component {
           completedTask = {this.completedTask}
           removeTask = {this.removeTask}
         />
+        {this.state.displayError ? "error" : ""}
       </div>
       )}
 }
